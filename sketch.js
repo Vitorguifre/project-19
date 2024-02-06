@@ -9,6 +9,7 @@ var gameOverImg,cycleBell;
 
 var pinkCG, yellowCG,redCG; 
 
+
 var END =0;
 var PLAY =1;
 var gameState = PLAY;
@@ -48,7 +49,7 @@ mainCyclist.addAnimation("SahilRunning",mainRacerImg1);
 mainCyclist.scale=0.07;
   
 //definir collider (colisor) para mainCyclist (ciclistaPrincipal)
-
+mainCyclist.setCollider("rectangle",0,0,40,40);
   
 gameOver = createSprite(650,150);
 gameOver.addImage(gameOverImg);
@@ -123,7 +124,9 @@ function draw() {
 }else if (gameState === END) {
     gameOver.visible = true;
     //Acrescente o código para mostrar o texto da instrução restart (reiniciar) aqui
-  
+  textSixe(20);
+  fill(255);
+  text("press up arrow to Restart the game!", 500,200);
   
     path.velocityX = 0;
     mainCyclist.velocityY = 0;
@@ -139,7 +142,9 @@ function draw() {
     redCG.setLifetimeEach(-1);
 
     //escreva uma condição para chamar a função reset()
-}
+if(keyDown("UP_ARROW")) {
+ reset();
+  }
 }
 
 function pinkCyclists(){
@@ -171,7 +176,17 @@ function redCyclists(){
 
 //criar função reset aqui
 
-
+function reset(){
+  gameState = PLAY;
+  gameOver.visible = false;
+  mainCyclist.addAnimation("SahilRunning",mainRacerImg1);
+  
+  pinkCG.destroyEach();
+  yellowCG.destroyEach();
+  redCG.destroyEach();
+  
+  distance = 0;
+}
 
 
 
